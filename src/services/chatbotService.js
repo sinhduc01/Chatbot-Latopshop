@@ -51,9 +51,8 @@ let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = await getUserName(sender_psid);
-            let response1 = { "text": `Chào mừng bạn ${username} đến với QBU IT` };
+            let response1 = { "text": `Chào mừng bạn ${username} đến với Duckpe` };
             let response2 = getStartedTemplate();
-
 
             //send text mess
             await callSendAPI(sender_psid, response1);
@@ -76,18 +75,18 @@ let getStartedTemplate = () => {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "Xin chào mừng bạn đến với QBU IT!",
+                        "title": "Xin chào mừng bạn đến với Duckpe!",
                         "subtitle": "Dưới đây là các lựa chọn.",
                         "image_url": IMAGE_GET_STARTED,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Thông tin cuộc thi",
+                                "title": "Thông tin cửa hàng",
                                 "payload": "CONTEST",
                             },
                             {
                                 "type": "postback",
-                                "title": "Hướng dẫn sử dụng",
+                                "title": "Hướng dẫn sử dụng bot",
                                 "payload": "USE_GUIDE",
                             }
                         ],
@@ -103,7 +102,6 @@ let getStartedTemplate = () => {
 let handleSendMainMenu = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-
             let response1 = getMainMenuTemplate();
             await callSendAPI(sender_psid, response1);
             resolve('done');
@@ -121,47 +119,47 @@ let getMainMenuTemplate = () => {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "Thông tin cuộc thi sắp tới.",
-                        "subtitle": "Cuộc thi do khoa KTCNTT và Trường ĐHQB phối hợp tổ chức.",
+                        "title": "Sản phẩm mới.",
+                        "subtitle": "Các sản phẩm công nghệ mới nhất được cập nhật!",
                         "image_url": IMAGE_CONTEST,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Điều lệ",
+                                "title": "Laptop",
                                 "payload": "CONTEST_ROLE",
                             },
                             {
                                 "type": "postback",
-                                "title": "Giải thưởng",
+                                "title": "Điện thoại",
                                 "payload": "CONTEST_AWARD",
                             },
                             {
                                 "type": "postback",
-                                "title": "Thời gian",
+                                "title": "Tai nghe",
                                 "payload": "CONTEST_TIME",
                             }
                         ],
                     },
                     {
-                        "title": "Đăng ký tham dự cuộc thi.",
-                        "subtitle": "Thí sinh có mong muốn tham gia có thể lựa chọn các hình thức đăng ký sau đây.",
+                        "title": "Sản phẩm bán chạy",
+                        "subtitle": "Các sản phẩm bán chạy nhất!",
                         "image_url": IMAGE_RESCONTEST,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Đăng ký tự do",
+                                "title": "Laptop",
                                 "payload": "CONTEST_RES1",
                             },
                             {
                                 "type": "postback",
-                                "title": "Đăng ký theo đội",
+                                "title": "Điện thoại",
                                 "payload": "CONTEST_RES2",
                             },
                         ],
                     },
                     {
-                        "title": "Liên hệ với ban tổ chức",
-                        "subtitle": "Giờ liên hệ bao gồm tất cả các ngày trong tuần",
+                        "title": "Thông tin liên hệ",
+                        "subtitle": "Thời gian liên hệ từ 8h-21h30 từ thứ 2 đến thứ 6",
                         "image_url": IMAGE_CONTACT,
                         "buttons": [
                             {
@@ -171,11 +169,17 @@ let getMainMenuTemplate = () => {
                             },
                             {
                                 "type": "postback",
-                                "title": "FB Page",
+                                "title": "Facebook",
                                 "payload": "FB_PAGE",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Website cửa hàng",
+                                "payload": "WEBSITE",
                             },
                         ],
                     },
+
                     {
                         "title": "Trờ về menu chính",
                         "subtitle": "",
@@ -337,6 +341,23 @@ let getSendFbPageTemplate = () => {
 
 }
 
+let handleSendWebsite = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            let response1 = getSendWebsiteTemplate();
+            await callSendAPI(sender_psid, response1);
+            resolve('done');
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getSendWebsiteTemplate = () => {
+
+}
+
 let handleBack = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -390,5 +411,6 @@ module.exports = {
     handleSendContestRes2: handleSendContestRes2,
     handleSendPhoneNumber: handleSendPhoneNumber,
     handleSendFbPage: handleSendFbPage,
+    handleSendWebsite: handleSendWebsite,
     handleBack: handleBack
 }
